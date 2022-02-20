@@ -285,7 +285,7 @@ The described process can be outlined using the following diagram:
 }
 ```
 
-2. Calculate final hash:
+2. Calculate the final hash:
 
 ```
 65dfee2163e02b70a488f20b32ea5822911d9b348a34c291d66b158b4efaf0d1
