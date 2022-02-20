@@ -20,6 +20,9 @@ public class JsonHash {
         if (object instanceof Collection) {
             return calculateForCollection((Collection<?>) object);
         }
+        if (object == null) {
+            return hashFunction.apply("");
+        }
         return hashFunction.apply(object.toString());
     }
 
