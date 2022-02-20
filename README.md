@@ -80,7 +80,7 @@ Lets take the following JSON as an example and calculate SHA256 hash of it:
     "b": 1,
     "c": 2
   },
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -102,7 +102,7 @@ The described process can be outlined using the following diagram:
     "b": 1,
     "c": 2
   },
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -119,7 +119,7 @@ The described process can be outlined using the following diagram:
     "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d": 1,
     "c": 2
   },
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -134,7 +134,7 @@ The described process can be outlined using the following diagram:
     "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
     "c": 2
   },
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -149,7 +149,7 @@ The described process can be outlined using the following diagram:
     "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
     "c": "2"
   },
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -164,7 +164,7 @@ The described process can be outlined using the following diagram:
     "adf7c66d8447bd52e7a2710d06dfb4e546ed83b7bf7a393f1f8616fd9e4663ad",
     "c": 2
   },
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -179,7 +179,7 @@ The described process can be outlined using the following diagram:
     "adf7c66d8447bd52e7a2710d06dfb4e546ed83b7bf7a393f1f8616fd9e4663ad",
     "82a6407e402ab1cbb29372ad0fb96c38d844bc26fd750d7ef99e426144ad5db8"
   ],
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -191,7 +191,7 @@ The described process can be outlined using the following diagram:
 ```json
 {
   "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb": "adf7c66d8447bd52e7a2710d06dfb4e546ed83b7bf7a393f1f8616fd9e4663ad82a6407e402ab1cbb29372ad0fb96c38d844bc26fd750d7ef99e426144ad5db8",
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -203,19 +203,19 @@ The described process can be outlined using the following diagram:
 ```json
 {
   "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb": "5b20f77135a3ab5829ca82d71415dd41dddfb037ec50fef272de2358769a2cde",
-  "b": [
+  "d": [
     1,
     2
   ]
 }
 ```
 
-10. Calculate hash for first entry:
+10. Calculate hash for the first entry:
 
 ```json
 {
   "f36e79ca8a7259ac6caebd77cc1d7441bb3523f2b3071333435b3b01e77102a5",
-  "b": [
+  "d": [
     1,
     2
   ]
@@ -224,7 +224,7 @@ The described process can be outlined using the following diagram:
 
 #### 2 Steps for array
 
-1. Take the second entry and calculate hash for key "b":
+1. Take the second entry and calculate hash for key "d":
 
 ```json
 {
@@ -285,5 +285,9 @@ The described process can be outlined using the following diagram:
 }
 ```
 
-2. Calculate final hash: **65dfee2163e02b70a488f20b32ea5822911d9b348a34c291d66b158b4efaf0d1**
+2. Calculate final hash:
+
+```
+65dfee2163e02b70a488f20b32ea5822911d9b348a34c291d66b158b4efaf0d1
+```
 
