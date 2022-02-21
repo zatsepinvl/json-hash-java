@@ -4,13 +4,21 @@ import com.jsonhash.sha.ApacheSha256;
 import com.jsonhash.sha.ApacheSha256Cached;
 import com.jsonhash.sha.JdkSha256;
 import com.jsonhash.testutil.Profiler;
+import com.jsonhash.testutil.ResourceUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.IntStream;
 
 import static com.jsonhash.testutil.JsonUtils.givenJson;
 
@@ -73,10 +81,11 @@ public class JsonHashBenchmark {
         Object json = givenJson("complex1.json");
         Profiler profiler = Profiler.start("");
 
-        for (int i = 0; i < n; i++) {
-            jsonHash.calculate(json);
-            profiler.tick();
-        }
+        IntStream.range(0, n)
+                .forEach(i -> {
+                    jsonHash.calculate(json);
+                    profiler.tick();
+                });
 
         profiler.finish();
         log.info(profiler.report());
