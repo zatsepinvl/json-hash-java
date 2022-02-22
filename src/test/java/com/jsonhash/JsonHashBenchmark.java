@@ -80,7 +80,23 @@ public class JsonHashBenchmark {
     @ParameterizedTest
     @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
     void testApacheWithLarge(int n) throws IOException {
-        benchmark("large.json", new JsonHash(new ApacheSha256Cached()), n);
+        benchmark("large.json", new JsonHash(new ApacheSha256()), n);
+    }
+
+
+    /**
+     * 10:43:09.912 task count = 10, running time seconds = 0.082, ops = 121.95.
+     * 10:43:10.170 task count = 100, running time seconds = 0.229, ops = 436.68.
+     * 10:43:10.815 task count = 1000, running time seconds = 0.635, ops = 1574.80.
+     * 10:43:12.566 task count = 2000, running time seconds = 1.741, ops = 1148.77.
+     * 10:43:14.903 task count = 3000, running time seconds = 2.326, ops = 1289.77.
+     * 10:43:18.619 task count = 5000, running time seconds = 3.710, ops = 1347.71.
+     * 10:43:26.005 task count = 10000, running time seconds = 7.377, ops = 1355.56.
+     */
+    @ParameterizedTest
+    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
+    void testDummyHashWithLarge(int n) throws IOException {
+        benchmark("large.json", new JsonHash(str -> "hash"), n);
     }
 
     private void benchmark(JsonHash jsonHash, int n) throws IOException {
@@ -92,7 +108,6 @@ public class JsonHashBenchmark {
         Profiler profiler = Profiler.start("");
 
         IntStream.range(0, n)
-                .parallel()
                 .forEach(i -> {
                     jsonHash.calculate(json);
                     profiler.tick();
