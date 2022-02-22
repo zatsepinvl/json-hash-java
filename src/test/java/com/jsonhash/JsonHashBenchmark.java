@@ -77,11 +77,22 @@ public class JsonHashBenchmark {
         benchmark(new JsonHash(new ApacheSha256Cached()), n);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
+    void testApacheWithLarge(int n) throws IOException {
+        benchmark("large.json", new JsonHash(new ApacheSha256Cached()), n);
+    }
+
     private void benchmark(JsonHash jsonHash, int n) throws IOException {
-        Object json = givenJson("complex1.json");
+        benchmark("complex1.json", jsonHash, n);
+    }
+
+    private void benchmark(String file, JsonHash jsonHash, int n) throws IOException {
+        Object json = givenJson(file);
         Profiler profiler = Profiler.start("");
 
         IntStream.range(0, n)
+                .parallel()
                 .forEach(i -> {
                     jsonHash.calculate(json);
                     profiler.tick();
