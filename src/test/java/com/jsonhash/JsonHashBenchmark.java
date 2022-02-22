@@ -39,7 +39,7 @@ public class JsonHashBenchmark {
      * 20:24:14.526 task count = 100000, running time seconds = 18.047, ops = 5541.09.
      */
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000})
+    @ValueSource(ints = {1, 10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000})
     void testJdk(int n) throws IOException {
         benchmark(new JsonHash(new JdkSha256()), n);
     }
@@ -55,7 +55,7 @@ public class JsonHashBenchmark {
      * 20:24:32.946 task count = 100000, running time seconds = 15.757, ops = 6346.39.
      */
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000})
+    @ValueSource(ints = {1, 10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000})
     void testApache(int n) throws IOException {
         benchmark(new JsonHash(new ApacheSha256()), n);
     }
@@ -72,15 +72,21 @@ public class JsonHashBenchmark {
      * 20:31:13.239 task count = 1000000, running time seconds = 14.402, ops = 69434.80.
      */
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
+    @ValueSource(ints = {1, 10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
     void testApacheCached(int n) throws IOException {
         benchmark(new JsonHash(new ApacheSha256Cached()), n);
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
-    void testApacheWithLarge(int n) throws IOException {
+    @ValueSource(ints = {1, 10, 100, 200, 300, 500, 800, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
+    void testApacheForLarge(int n) throws IOException {
         benchmark("large.json", new JsonHash(new ApacheSha256()), n);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
+    void testApacheForXLarge(int n) throws IOException {
+        benchmark("xlarge.json", new JsonHash(new ApacheSha256()), n);
     }
 
 
@@ -94,7 +100,7 @@ public class JsonHashBenchmark {
      * 10:43:26.005 task count = 10000, running time seconds = 7.377, ops = 1355.56.
      */
     @ParameterizedTest
-    @ValueSource(ints = {10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
+    @ValueSource(ints = {1, 10, 100, 1000, 2000, 3000, 5000, 10_000, 100_000, 1_000_000})
     void testDummyHashWithLarge(int n) throws IOException {
         benchmark("large.json", new JsonHash(str -> "hash"), n);
     }
